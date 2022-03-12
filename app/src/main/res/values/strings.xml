@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">HRec</string>
+    <string name="app_copyrightClaim">©2021 Pogg Inc. All Rights Reserved</string>
+    <string name="tv_recruiter">Recruiter</string>
+    <string name="tv_hrd">HRD</string>
+    <string name="tv_director">Director</string>
+
+<!--    Login Page-->
+    <string name="tv_Email">Email</string>
+    <string name="edt_hintEmail">Enter your email address</string>
+    <string name="tv_Password">Password</string>
+    <string name="edt_hintPassword">Enter your password</string>
+    <string name="tv_checkStaySigned">Stay signed in</string>
+    <string name="tv_forgotPassword">Forgot Password ?</string>
+    <string name="btn_signIn">Sign In</string>
+    <string name="tv_noAccount">Don\'t have an account</string>
+    <string name="tv_signUp">Sign Up</string>
+    <string name="btn_google">Google</string>
+    <string name="btn_facebook">Facebook</string>
+    <string name="tv_wrongEmail">*Email Not Found </string>
+
+<!--    Sign Up-->
+    <string name="tv_fullName">FullName</string>
+    <string name="edt_hintFullName">Enter your Full Name</string>
+    <string name="tv_confirmPassword">Confirm Password</string>
+    <string name="edt_hintConfirmPassword">Retype your password</string>
+    <string name="tv_position">Position</string>
+    <string name="edt_position">Job Title</string>
+    <string name="tv_termsService">By signing up, you agree with our terms and services</string>
+    <string name="btn_signUp">Sign Up</string>
+    <string name="tv_newPassword">New Password</string>
+    <string name="tv_confirmNewPassword">Confirm New Password</string>
+
+<!--    Forgot Password-->
+    <string name="tv_titleForgotPassword">Please enter the verification code we’ve sent
+        to %1$s in order to change your password.</string>
+    <string name="tv_verifyCode">Verification Code</string>
+    <string name="edt_hintVerifyCode">Enter verification code</string>
+    <string name="tv_sendVerifyCode">Send verification code</string>
+    <string name="tv_titleSuccessEnterNewPassword">Enter your new password.
+        The password must be alphanumeric and at least 8 characters long</string>
+    <string name="btn_changePassword">Change Passowrd</string>
+
+<!--    On Boarding-->
+    <string name="tv_GettingStarted">Getting Started</string>
+    <string name="tv_descGettingStarted">
+        <br>
+            Recruiting and organizing new employees can be a hassle without a proper management system.\n\n
+        </br>
+        <br>
+            Hrec is an app that is available for companies to make it easier in recruiting and organizing
+            new employees. All basic services are available for free.
+        </br>
+    </string>
+    <string name="tv_overviewTutorial">Overview Tutorial</string>
+    <string name="tv_descOverviewTutorial">The picture above is a hint of the dashboard of the app</string>
+    <string name="tv_allClear">All Clear!</string>
+    <string name="tv_descAllClear">
+        <br>
+            From now on, you will hold full responsibility over the employees you choose. We hope
+            you pick the right and honest decision!\n\n
+        </br>
+        <br>
+            Get the right people for your dream!
+        </br>
+    </string>
+
+<!--    Dashboard-->
+    <string name="tv_titleCandidate">Candidate</string>
+    <string name="tv_titleAccepted">Accepted</string>
+    <string name="tv_ekonomi">Ekonomi</string>
+    <string name="tv_management">Management</string>
+    <string name="tv_iT">IT</string>
+    <string name="tv_profile">Profile</string>
+    <string name="tv_notification">Notification</string>
+    <string name="tv_allFilter">ALL</string>
+
+<!--    POP UP-->
+    <string name="tv_acceptTo">Are you sure you want to accept this Candidate to %1$s ?</string>
+    <string name="tv_declinedTo">Are you sure you want to reject this candidate ?</string>
+    <string name="tv_checkYes">Yes, I\'m Sure</string>
+    <string name="tv_cancel">Cancel</string>
+    <string name="tv_Accept">Accept</string>
+    <string name="tv_reject">Reject</string>
+    <string name="tv_decline">Decline</string>
+    <string name="tv_undoSelection">Undo your selection ?</string>
+    <string name="tv_checkConfirmSection">Confirm this section</string>
+    <string name="tv_areYouSure">Are you sure ?</string>
+    <string name="tv_logout">Logout</string>
+    <string name="tv_emailCheck">If you found out that your identity is invalid,
+        please contact our Customer Support at %1$s</string>
+
+<!--    Notification-->
+    <string name="tv_rejectUser">YOU HAVE REJECTED %1$s</string>
+    <string name="tv_userDeclined">%1$s HAVE DECLINED %2$d </string>
+    <string name="tv_positionUser">Position : %1$s</string>
+    <string name="tv_scoreUser">Score : %1$s</string>
+
+<!--    Profile-->
+    <string name="tv_specialization">Specialization</string>
+    <string name="tv_lastDegree">last Degree</string>
+    <string name="tv_experience">Experience</string>
+    <string name="tv_biodata">Biodata</string>
+    <string name="tv_evaluation">Evaluation</string>
+    <string name="tv_listView">List View</string>
+
+<!--    score-->
+    <string name="tv_speech">Speech</string>
+    <string name="tv_leadership">Leadership</string>
+    <string name="tv_critThinking">C.Thinking</string>
+    <string name="tv_math">Math</string>
+    <string name="tv_probSolving">P.Solving</string>
+    <string name="tv_organizing">Organizing</string>
+    <string name="tv_score">Score : </string>
+
+</resources>
