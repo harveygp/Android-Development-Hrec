@@ -16,10 +16,18 @@ fun SetupNavGraph(
         forgotPasswordGraph(navController = navController)
         profileGraph(navController = navController)
 
+<<<<<<< HEAD
+//      Sign In
+        signInGraph(navController = navController)
+
+//      Sign Up
+        signUpGraph(navController = navController)
+=======
         //splash screen
         splashScreenGraph(navController = navController)
 
         //onboard screen
         onboardScreenGraph(navController = navController)
+>>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
     }
 }
