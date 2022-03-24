@@ -9,6 +9,7 @@ import com.example.hrec.presentation.forgotPassword.ForgotPasswordNew
 
 fun NavGraphBuilder.forgotPasswordGraph(
     navController: NavHostController
+<<<<<<< HEAD
 ) {
     navigation(
         startDestination = Screen.ForgotPassword.route,
@@ -17,12 +18,30 @@ fun NavGraphBuilder.forgotPasswordGraph(
         composable(
             route = Screen.ForgotPassword.route
         ) {
+=======
+){
+    navigation(
+        startDestination = Screen.ForgotPassword.route,
+        route = FORGOT_PASSWORD_ROUTE
+    ){
+        composable(
+            route = Screen.ForgotPassword.route
+        ){
+>>>>>>> 49787092dedc400239df3c43477617fbd043402a
             ForgotPassword(navController = navController)
         }
         composable(
             route = Screen.ForgotPasswordNew.route
+<<<<<<< HEAD
         ) {
             ForgotPasswordNew(navController = navController)
         }
     }
 }
+=======
+        ){
+            ForgotPasswordNew(navController = navController)
+        }
+    }
+}
+>>>>>>> 49787092dedc400239df3c43477617fbd043402a
