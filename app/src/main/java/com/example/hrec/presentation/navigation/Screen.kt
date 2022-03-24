@@ -1,6 +1,15 @@
 package com.example.hrec.presentation.navigation
 
 <<<<<<< HEAD
+const val FORGOT_PASSWORD_ROUTE = "forgotpassword"
+const val PROFILE_ROUTE = "profileaccount"
+const val ROOT_ROUTE = "root"
+// Notification
+const val NOTIFICATION_ROUTE = "notification"
+
+sealed class Screen(val route : String){
+=======
+<<<<<<< HEAD
 //Sign In
 const val SIGN_IN_ROUTE = "signin"
 
@@ -28,12 +37,18 @@ const val ONBOARD_ROUTE  = "onboard"
 
 sealed class Screen(val route : String){
 >>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
+>>>>>>> 49787092dedc400239df3c43477617fbd043402a
 
     object ForgotPassword : Screen("forgot_password_screen")
     object ForgotPasswordNew : Screen("forgot_password_new_screen")
     object Profile : Screen("profile_account")
     object testScreen : Screen("test_screen")
     object test2Screen : Screen("test_2_screen")
+<<<<<<< HEAD
+    // Notification Object
+    object Notification : Screen("notification_screen")
+
+=======
 
 <<<<<<< HEAD
 =======
@@ -47,4 +62,5 @@ sealed class Screen(val route : String){
 
 
 >>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
+>>>>>>> 49787092dedc400239df3c43477617fbd043402a
 }
