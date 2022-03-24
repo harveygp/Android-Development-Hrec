@@ -35,6 +35,7 @@
     <string name="tv_titleForgotPassword">Please enter the verification code we’ve sent
         to %1$s in order to change your password.</string>
     <string name="tv_verifyCode">Verification Code</string>
+    <string name="tv_forgotPasswordVerify">Forgot Password</string>
     <string name="edt_hintVerifyCode">Enter verification code</string>
     <string name="tv_sendVerifyCode">Send verification code</string>
     <string name="tv_titleSuccessEnterNewPassword">Enter your new password.
@@ -91,7 +92,9 @@
         please contact our Customer Support at %1$s</string>
 
 <!--    Notification-->
-    <string name="tv_rejectUser">YOU HAVE REJECTED %1$s</string>
+    <string name="tv_rejectUser">%1$s HAVE REJECTED %2$d</string>
+    <!--   Accepted    -->
+    <string name="tv_acceptUser">%1$s HAVE ACCEPTED %2$d</string>
     <string name="tv_userDeclined">%1$s HAVE DECLINED %2$d </string>
     <string name="tv_positionUser">Position : %1$s</string>
     <string name="tv_scoreUser">Score : %1$s</string>
@@ -103,6 +106,7 @@
     <string name="tv_biodata">Biodata</string>
     <string name="tv_evaluation">Evaluation</string>
     <string name="tv_listView">List View</string>
+    <string name="tv_name">Name</string>
 
 <!--    score-->
     <string name="tv_speech">Speech</string>

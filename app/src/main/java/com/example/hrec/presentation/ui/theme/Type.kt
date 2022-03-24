@@ -8,8 +8,10 @@ import com.example.hrec.R
 
 // font family rubik
 private val Rubik = FontFamily(
-    Font(R.font.rubik_italic_variablefont_wght, FontWeight.Normal,FontStyle.Italic),
-    Font(R.font.rubik_variablefont_wght)
+    Font(R.font.rubik_bold, FontWeight.Bold),
+    Font(R.font.rubik_semibold, FontWeight.SemiBold),
+    Font(R.font.rubik_regular, FontWeight.Normal),
+    Font(R.font.rubik_extrabold, FontWeight.ExtraBold)
 )
 
 val RubikTypography = Typography(
