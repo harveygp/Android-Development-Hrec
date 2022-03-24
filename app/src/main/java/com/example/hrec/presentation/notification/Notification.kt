@@ -122,7 +122,7 @@ fun Notification(navController: NavHostController) {
                         Column(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(color = colorResource(id = R.color.bright_blue))
+                                .background(color = colorResource(id = R.color.less_light_primary))
                         ) {
                             Column(
                                 modifier = Modifier

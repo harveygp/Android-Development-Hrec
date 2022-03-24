@@ -17,6 +17,4 @@
     <color name="dark_green">#217672</color>
     <color name="light_green">#A4EAE8</color>
     <color name="transparent">#00000000</color>
-    <!--  Notification  -->
-    <color name="bright_blue">#D0E2FF</color>
 </resources>
