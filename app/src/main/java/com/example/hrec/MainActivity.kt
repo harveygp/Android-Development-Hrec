@@ -16,6 +16,16 @@ import com.example.hrec.presentation.SetupNavGraph
 import com.example.hrec.presentation.forgotPassword.ForgotPassword
 import com.example.hrec.presentation.forgotPassword.ForgotPasswordNew
 import com.example.hrec.presentation.profile.Profile
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+import com.example.hrec.presentation.signIn.SignIn
+=======
+>>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
+>>>>>>> 49787092dedc400239df3c43477617fbd043402a
+>>>>>>> cf1db6205633696024a218af047939ad66e4b9a3
 import com.example.hrec.presentation.ui.theme.HRecTheme
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +44,16 @@ class MainActivity : ComponentActivity() {
 //                ForgotPasswordNew()
 //                ForgotPassword()
 //                Profile()
+<<<<<<< HEAD
+=======
+                <<<<<<< HEAD
+                =======
+                <<<<<<< HEAD
+//                SignIn()
+                =======
+                >>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
+                >>>>>>> 49787092dedc400239df3c43477617fbd043402a
+>>>>>>> cf1db6205633696024a218af047939ad66e4b9a3
 //                }
             }
         }
@@ -51,4 +71,8 @@ fun Greeting(name: String) {
 //    HRecTheme {
 //        Greeting("Android")
 //    }
+<<<<<<< HEAD
 //}
+=======
+//}
+>>>>>>> cf1db6205633696024a218af047939ad66e4b9a3

@@ -17,4 +17,7 @@
     <color name="dark_green">#217672</color>
     <color name="light_green">#A4EAE8</color>
     <color name="transparent">#00000000</color>
+<!--    Tambah Lt Gray & Facebook-->
+    <color name="light_gray">#4D4D4D4D</color>
+    <color name="teal_primary">#395185</color>
 </resources>

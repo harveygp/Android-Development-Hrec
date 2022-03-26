@@ -13,11 +13,14 @@
     <string name="tv_checkStaySigned">Stay signed in</string>
     <string name="tv_forgotPassword">Forgot Password ?</string>
     <string name="btn_signIn">Sign In</string>
-    <string name="tv_noAccount">Don\'t have an account</string>
+<!--    Tambah "?"-->
+    <string name="tv_noAccount">Don\'t have an account ?</string>
     <string name="tv_signUp">Sign Up</string>
     <string name="btn_google">Google</string>
     <string name="btn_facebook">Facebook</string>
     <string name="tv_wrongEmail">*Email Not Found </string>
+<!--    Tambah OR-->
+    <string name="tv_or">OR</string>
 
 <!--    Sign Up-->
     <string name="tv_fullName">FullName</string>
@@ -92,7 +95,9 @@
         please contact our Customer Support at %1$s</string>
 
 <!--    Notification-->
-    <string name="tv_rejectUser">YOU HAVE REJECTED %1$s</string>
+    <string name="tv_rejectUser">%1$s HAVE REJECTED %2$d</string>
+    <!--   Accepted    -->
+    <string name="tv_acceptUser">%1$s HAVE ACCEPTED %2$d</string>
     <string name="tv_userDeclined">%1$s HAVE DECLINED %2$d </string>
     <string name="tv_positionUser">Position : %1$s</string>
     <string name="tv_scoreUser">Score : %1$s</string>
