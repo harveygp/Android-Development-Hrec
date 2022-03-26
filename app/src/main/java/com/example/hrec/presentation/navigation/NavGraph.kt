@@ -1,8 +1,9 @@
-package com.example.hrec.presentation
+package com.example.hrec.presentation.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import com.example.hrec.presentation.navigation.dashboardGraph
 import com.example.hrec.presentation.navigation.*
 
 @Composable
@@ -15,5 +16,8 @@ fun SetupNavGraph(
     ){
         forgotPasswordGraph(navController = navController)
         profileGraph(navController = navController)
+
+        // Dashboard
+        dashboardGraph(navController = navController)
     }
 }
