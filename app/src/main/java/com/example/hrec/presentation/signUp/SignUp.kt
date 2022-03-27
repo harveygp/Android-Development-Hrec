@@ -16,6 +16,7 @@ import androidx.compose.material.icons.filled.Edit
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -29,9 +30,11 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.presentation.navigation.ONBOARD_ROUTE
 
 @Composable
 fun SignUp(
@@ -281,21 +284,30 @@ fun SignUp(
                     verticalArrangement = Arrangement.Bottom,
                     horizontalAlignment = Alignment.Start)
                 {
-                    IconButton(
-                        onClick = { /*TODO*/ },
-                        modifier = Modifier.fillMaxWidth(),
-                    ) {
-                        Row() {
-                            Icon(
-                                painter = painterResource(id = R.drawable.ic_unchecked),
-                                contentDescription = "Unchecked",
-                                tint = colorResource(id = R.color.teal_primary) )
-                            Text(
-                                text = stringResource(id = R.string.tv_termsService),
-                                style = MaterialTheme.typography.subtitle2,
-                                modifier = Modifier.padding(horizontal = 4.dp),
-                                color = colorResource(id = R.color.teal_primary)
-                            )
+                    Row(modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = CenterVertically,
+                        horizontalArrangement = Arrangement.Start) {
+                        IconButton(
+                            onClick = { /*TODO*/ },
+                            modifier = Modifier
+                                .defaultMinSize(minWidth = 1.dp, minHeight = 1.dp)
+                                .fillMaxWidth()
+                        ) {
+                            Row(modifier = Modifier.fillMaxWidth(),
+                                verticalAlignment = CenterVertically,
+                                horizontalArrangement = Arrangement.Start) {
+                                Icon(
+                                    painter = painterResource(id = R.drawable.ic_unchecked),
+                                    contentDescription = "Unchecked",
+                                    tint = colorResource(id = R.color.teal_primary) )
+                                Text(
+                                    text = stringResource(id = R.string.tv_termsService),
+                                    style = MaterialTheme.typography.subtitle2,
+                                    fontSize = 10.sp,
+                                    modifier = Modifier.padding(horizontal = 4.dp),
+                                    color = colorResource(id = R.color.teal_primary)
+                                )
+                            }
                         }
                     }
 
@@ -308,7 +320,10 @@ fun SignUp(
                             RoundedCornerShape(dimensionResource(id = R.dimen.small_to_normal))
                         ),
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.primary)),
-                        onClick = { Toast.makeText(context,"Button Clicked ", Toast.LENGTH_LONG).show() }) {
+                        onClick = {
+                            navController.navigate(
+                                route = ONBOARD_ROUTE)
+                        }) {
                         Row(modifier = Modifier.padding(dimensionResource(id = R.dimen.very_small_to_small))){
                             Text(
                                 text = stringResource(id = R.string.tv_signUp),

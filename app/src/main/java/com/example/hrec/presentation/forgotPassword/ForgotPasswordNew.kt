@@ -32,6 +32,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.hrec.R
 import com.example.hrec.presentation.navigation.PROFILE_ROUTE
+import com.example.hrec.presentation.navigation.SIGN_IN_ROUTE
 
 @Composable
 fun ForgotPasswordNew(
@@ -163,7 +164,7 @@ fun ForgotPasswordNew(
                 verticalArrangement = Arrangement.Bottom)
                 {
                     Button(
-                        onClick = { navController.navigate(PROFILE_ROUTE) },
+                        onClick = { navController.navigate(SIGN_IN_ROUTE) },
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.very_small_to_small))),

@@ -1,10 +1,7 @@
 package com.example.hrec.presentation.signIn
 
 import android.widget.Space
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -28,12 +25,12 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
-import com.example.hrec.presentation.navigation.FORGOT_PASSWORD_ROUTE
-import com.example.hrec.presentation.navigation.Screen
+import com.example.hrec.presentation.navigation.*
 import com.example.hrec.presentation.profile.Profile
 
 @Composable
@@ -55,7 +52,7 @@ fun SignIn(
             Column(modifier = Modifier
                 .padding(dimensionResource(id = R.dimen.large_to_huge))) {
                 Row(modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.large_to_huge))
+                    .padding(vertical = dimensionResource(id = R.dimen.large_to_huge))
                     .fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -66,16 +63,16 @@ fun SignIn(
                     )
                     Column(
                         modifier = Modifier
-                            .padding(start = dimensionResource(id = R.dimen.large)),
-                        horizontalAlignment = Alignment.CenterHorizontally,
+                            .padding(start = dimensionResource(id = R.dimen.large))
                     ) {
                         Row(modifier = Modifier
                             .height(130.dp),
                             verticalAlignment = Alignment.CenterVertically) {
                             Text(
-                                style = MaterialTheme.typography.h4,
+                                style = MaterialTheme.typography.h1,
+                                fontSize = 42.sp,
                                 color = colorResource(id = R.color.primary),
-                                fontWeight = FontWeight.ExtraBold,
+                                fontWeight = FontWeight.Bold,
                                 text = stringResource(id = R.string.app_name))
                         }
                     }
@@ -115,7 +112,6 @@ fun SignIn(
                     onValueChange ={
                         password = it
                     },
-                    placeholder = { Text(text = stringResource(id = R.string.tv_Password))},
                     label = {
                         Text(text = stringResource(id = R.string.tv_Password))
                     },
@@ -157,7 +153,8 @@ fun SignIn(
                                     modifier = Modifier
                                         .padding(horizontal = 4.dp),
                                     text = stringResource(id = R.string.tv_checkStaySigned),
-                                    fontWeight = FontWeight.SemiBold)
+                                    fontWeight = FontWeight.SemiBold,
+                                    style = MaterialTheme.typography.subtitle1)
                             }
                         }
                     }
@@ -177,7 +174,8 @@ fun SignIn(
                             ) {
                                 Text(
                                     text = stringResource(id = R.string.tv_forgotPassword),
-                                    fontWeight = FontWeight.SemiBold)
+                                    fontWeight = FontWeight.SemiBold,
+                                    style = MaterialTheme.typography.subtitle1)
                             }
                         }
                     }
@@ -192,7 +190,10 @@ fun SignIn(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    Button(onClick = { /*TODO*/ },
+                    Button(onClick = {
+                        navController.navigate(
+                            route = ONBOARD_ROUTE)
+                                     },
                         modifier = Modifier
                             .fillMaxWidth()
                             .clip(RoundedCornerShape(dimensionResource(id = R.dimen.small))),
@@ -202,6 +203,7 @@ fun SignIn(
                         Text(
                             modifier = Modifier.padding(dimensionResource(id = R.dimen.very_small_to_small)),
                             style = MaterialTheme.typography.h6,
+                            fontSize = 18.sp,
                             text = stringResource(id = R.string.btn_signIn),
                             )
                     }
@@ -212,6 +214,7 @@ fun SignIn(
                         horizontalAlignment = Alignment.CenterHorizontally,
                     ) {
                         Row(
+                            verticalAlignment = Alignment.CenterVertically,
                             horizontalArrangement = Arrangement.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -219,82 +222,33 @@ fun SignIn(
                             Column() {
                                 Row(
                                     modifier = Modifier
-                                        .padding(dimensionResource(id = R.dimen.padding_small)),
+                                        .padding(dimensionResource(id = R.dimen.very_small_to_small)),
                                     horizontalArrangement = Arrangement.Center
                                 ) {
                                     Text(text = stringResource(id = R.string.tv_noAccount),
                                         fontWeight = FontWeight.SemiBold,
-                                        color = colorResource(id = R.color.primary))
+                                        color = colorResource(id = R.color.primary),
+                                        style = MaterialTheme.typography.subtitle1)
                                 }
                             }
-                            Button(
-                                onClick = {
-                                            navController.navigate(
-                                                route = Screen.SignUp.route
-                                            )
-                                          },
-                                contentPadding = PaddingValues(vertical = dimensionResource(id = R.dimen.padding_small)),
-                                elevation = ButtonDefaults.elevation(defaultElevation = 0.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    backgroundColor = colorResource(id = R.color.white),
-                                    contentColor = colorResource(id = R.color.dark_green)
-                                ),
-                            ) {
-                                Text(
+                                Text(modifier = Modifier.clickable {
+                                    navController.navigate(
+                                        route = SIGN_UP_ROUTE)
+                                },
                                     text = stringResource(id = R.string.btn_signUp),
                                     fontWeight = FontWeight.SemiBold,
                                     style = TextStyle(
                                         textDecoration = TextDecoration.Underline
-                                    )
+                                    ),
+                                    fontSize = 12.sp,
+                                    color = colorResource(id = R.color.dark_green)
                                 )
-                            }
                         }
                     }
                 }
 
                 Spacer(modifier = Modifier
                     .height(dimensionResource(id = R.dimen.text_normal)))
-
-//                Row(modifier = Modifier
-//                    .padding(horizontal = dimensionResource(id = R.dimen.large_to_huge)),
-//                ) {
-//                    OutlinedTextField(modifier = Modifier
-//                        .fillMaxWidth(),
-//                        value = "nameProfile",
-//                        textStyle = MaterialTheme.typography.body1,
-//                        onValueChange ={
-////                        nameProfile = it
-//                        },label = {
-//                            Text(text = stringResource(id = R.string.tv_name))
-//                        },
-//                        maxLines = 1,
-//                        colors = TextFieldDefaults.outlinedTextFieldColors(
-//                            unfocusedBorderColor = colorResource(id = R.color.primary)),
-//                        trailingIcon = {
-//                            Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit" )
-//                        }
-//                    )
-//
-//                    Spacer(modifier = Modifier
-//                        .height(dimensionResource(id = R.dimen.small_to_normal)))
-//
-//                    OutlinedTextField(modifier = Modifier
-//                        .fillMaxWidth(),
-//                        value = "email",
-//                        textStyle = MaterialTheme.typography.body1,
-//                        onValueChange ={
-////                        email= it
-//                        },label = {
-//                            Text(text = stringResource(id = R.string.tv_Email))
-//                        },
-//                        maxLines = 1,
-//                        colors = TextFieldDefaults.outlinedTextFieldColors(
-//                            unfocusedBorderColor = colorResource(id = R.color.primary)),
-//                        trailingIcon = {
-//                            Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "Check" )
-//                        }
-//                    )
-//                }
             }
         }
 
@@ -386,7 +340,9 @@ fun SignIn(
             ) {
                 Text(text = stringResource(id = R.string.app_copyrightClaim),
                     color = colorResource(id = R.color.light_gray),
-                modifier = Modifier.padding(bottom = 14.dp))
+                    modifier = Modifier.padding(bottom = 14.dp),
+                    fontSize = 10.sp,
+                    style = MaterialTheme.typography.subtitle2)
             }
         }
     }

@@ -34,6 +34,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
+import androidx.compose.ui.Alignment.Companion.TopStart
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
@@ -47,6 +48,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import com.example.hrec.presentation.navigation.PROFILE_ROUTE
+import com.example.hrec.presentation.navigation.Screen
 import com.example.hrec.presentation.ui.theme.HRecTheme
 
 @Composable
@@ -168,7 +171,10 @@ fun Dashboard(navController: NavHostController) {
                                 colors = ButtonDefaults.outlinedButtonColors(
                                     backgroundColor = colorResource(id = R.color.primary)
                                 ),
-                                onClick = { /*TODO*/ })
+                                onClick = {
+                                    navController.navigate(
+                                        route = PROFILE_ROUTE)
+                                })
                             {
                                 Image(
                                     modifier = Modifier
@@ -192,66 +198,10 @@ fun Dashboard(navController: NavHostController) {
                     "candidate" -> DashboardCandidate()
                     "accepted" -> DashboardAccepted()
                 }
-
-//                Column(
-//                    modifier = Modifier
-//                        .fillMaxSize()
-//                        .background(color = colorResource(id = R.color.primary)),
-//                    horizontalAlignment = Alignment.CenterHorizontally
-//                ) {
-//                    Surface(
-//                        modifier = Modifier
-//                            .fillMaxSize()
-//                            .weight(12f)
-//                            .clip(
-//                                RoundedCornerShape(
-//                                    topStart = dimensionResource(id = R.dimen.large),
-//                                    topEnd = dimensionResource(id = R.dimen.large)
-//                                )
-//                            ),
-//                        color = Color.Red
-//                    )
-//                    {
-//                        Column(
-//                            modifier = Modifier
-//                                .fillMaxWidth()
-//                                .padding(dimensionResource(id = R.dimen.large_to_huge))
-//                        )
-//                        {
-//
-//                        }
-//                    }
-//                }
-
             }
         }
 
     }
-//    Scaffold(
-//        topBar = {
-//                TopNavigationBar(
-//                    items = listOf(
-//                        TopNavItem(
-//                            name = "Candidate",
-//                            route = "candidate",
-//                            icon = R.drawable.ic_candidate
-//                        ),
-//                        TopNavItem(
-//                            name = "Accepted",
-//                            route = "accepted",
-//                            icon = R.drawable.ic_accept,
-//                        ),
-//
-//                        ),
-//                    navController = navController,
-//                    onItemClick = {
-//                        navController.navigate(it.route)
-//                    }
-//                )
-//        }
-//        ) {
-//            DashboardNavigation(navController = navController)
-//        }
 }
 
 @Composable
@@ -445,21 +395,40 @@ fun CandidateList(amount: Int) {
                             .padding(
                                 start = dimensionResource(id = R.dimen.large_to_huge),
                                 end = dimensionResource(id = R.dimen.large_to_huge),
-                                top = dimensionResource(id = R.dimen.small_to_normal)
+                                top = dimensionResource(id = R.dimen.normal)
                             )
                     ) {
                         Text(
                             text = "Derle Bohrmann",
                             textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.h5
+                            style = MaterialTheme.typography.h5,
+                            fontSize = 20.sp,
+                            fontWeight = FontWeight.SemiBold
                         )
                         Text(
-                            modifier = Modifier.padding(start = 72.dp),
-                            text = "Economy, 90", style = MaterialTheme.typography.body2
+                            modifier = Modifier.padding(start = 72.dp, top = dimensionResource(id = R.dimen.very_small_to_small)),
+                            text = "Economy, 90", style = MaterialTheme.typography.body2,
+                            fontSize = 12.sp
                         )
                     }
+
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small)))
 
+                }
+                Row(
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .padding(
+                            top = dimensionResource(id = R.dimen.small)
+                        )
+                        .align(TopStart)
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .clip(CircleShape)
+                            .size(16.dp)
+                            .background(colorResource(id = R.color.bright_green))
+                    )
                 }
                 Row(
                     modifier = Modifier
@@ -482,21 +451,7 @@ fun CandidateList(amount: Int) {
                         contentDescription = "Profile Image"
                     )
                 }
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.TopStart)
-                        .padding(
-                            top = dimensionResource(id = R.dimen.small)
-                        )
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(16.dp)
-                            .background(colorResource(id = R.color.bright_green))
 
-                    )
-                }
             }
 
         }
@@ -621,23 +576,23 @@ fun Divider(title: String) {
     }
 }
 
-@Preview
-@Composable
-fun DashboardPreview() {
-    Dashboard(navController = rememberNavController())
-}
+//@Preview
+//@Composable
+//fun DashboardPreview() {
+//    Dashboard(navController = rememberNavController())
+//}
 
 @Preview
 @Composable
 fun DashboardCandidatePreview() {
     DashboardCandidate()
 }
-
-@Preview
-@Composable
-fun DashboardAcceptedPreview() {
-    DashboardAccepted()
-}
+//
+//@Preview
+//@Composable
+//fun DashboardAcceptedPreview() {
+//    DashboardAccepted()
+//}
 
 
 

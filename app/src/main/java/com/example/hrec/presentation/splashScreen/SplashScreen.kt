@@ -32,6 +32,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.presentation.navigation.SIGN_IN_ROUTE
 import kotlinx.coroutines.delay
 
 
@@ -52,8 +53,7 @@ fun SplashScreen(
     LaunchedEffect(key1 = true) {
         startAnimation = true
         delay(4000)
-//        navController.popBackStack()
-//        navController.navigate(Screen.Home.route)
+        navController.navigate(SIGN_IN_ROUTE)
     }
     Splash(alpha = alphaAnim.value)
 }
