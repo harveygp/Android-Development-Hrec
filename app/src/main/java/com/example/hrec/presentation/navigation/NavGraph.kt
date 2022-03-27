@@ -15,13 +15,7 @@ fun SetupNavGraph(
     ){
         forgotPasswordGraph(navController = navController)
         profileGraph(navController = navController)
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-        <<<<<<< HEAD
-=======
 
->>>>>>> 415502e1b709cb6af62c2d4972f31475ef4acaa2
 //        Notification
         notificationGraph(navController = navController)
 
@@ -39,6 +33,5 @@ fun SetupNavGraph(
 
         //Dashboard Graph
         dashboardGraph(navController = navController)
->>>>>>> cf1db6205633696024a218af047939ad66e4b9a3
     }
 }
