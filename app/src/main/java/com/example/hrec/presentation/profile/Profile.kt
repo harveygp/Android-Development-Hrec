@@ -29,6 +29,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.presentation.navigation.ONBOARD_ROUTE
+import com.example.hrec.presentation.navigation.SIGN_IN_ROUTE
 
 @Composable
 fun Profile(
@@ -246,7 +248,7 @@ fun Profile(
                             onValueChange ={
                                 position= it
                             },label = {
-                                Text(text = stringResource(id = R.string.tv_Email))
+                                Text(text = stringResource(id = R.string.tv_position))
                             },
                             maxLines = 1,
                             colors = TextFieldDefaults.outlinedTextFieldColors(
@@ -270,7 +272,11 @@ fun Profile(
                     Button(modifier = Modifier.clip(
                         RoundedCornerShape(dimensionResource(id = R.dimen.small_to_normal))),
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.light_primary)),
-                        onClick = { Toast.makeText(context,"Button Clicked ", Toast.LENGTH_LONG).show() }) {
+                        onClick = {
+                            navController.navigate(
+                                route = SIGN_IN_ROUTE
+                            )
+                        }) {
                         Row(modifier = Modifier.padding(dimensionResource(id = R.dimen.very_small_to_small))){
                             Image(painter = painterResource(id = R.drawable.ic_out),
                                 contentDescription = "Logout")

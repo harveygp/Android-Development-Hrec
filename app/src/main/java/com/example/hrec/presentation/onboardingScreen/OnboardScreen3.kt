@@ -24,6 +24,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.presentation.navigation.DASHBOARD_ROUTE
+import com.example.hrec.presentation.navigation.Screen
 
 @Composable
 fun OnboardScreen3(navController: NavHostController) {
@@ -70,17 +72,6 @@ fun OnboardScreen3(navController: NavHostController) {
 
         }
 
-//        Box(modifier = Modifier
-//            .fillMaxWidth()
-//            .weight(6f),
-//          ) {
-//            Column(modifier = Modifier, verticalArrangement = Arrangement.Center, horizontalAlignment = Alignment.CenterHorizontally) {
-//                Image(painter = painterResource(id = R.drawable.ic_getting_started01),
-//                    contentDescription = "SplashImage")
-//            }
-//
-//        }
-
         Surface(
             modifier = Modifier
                 .clip(
@@ -120,7 +111,10 @@ fun OnboardScreen3(navController: NavHostController) {
                         modifier = Modifier
                             .size(60.dp),
                         shape = CircleShape,
-                        onClick = { /*TODO*/ }) {
+                        onClick = {
+                            navController.navigate(
+                                route = DASHBOARD_ROUTE)
+                        }) {
                         Icon(
                             Icons.Filled.Check,
                             contentDescription = "next_icon",
@@ -128,16 +122,9 @@ fun OnboardScreen3(navController: NavHostController) {
                                 id = R.color.white
                             )
                         )
-
                     }
-
-
                 }
-
-
             }
-
-
         }
     }
 }

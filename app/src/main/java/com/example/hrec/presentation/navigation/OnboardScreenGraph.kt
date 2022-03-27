@@ -7,7 +7,6 @@ import androidx.navigation.navigation
 import com.example.hrec.presentation.forgotPassword.ForgotPassword
 import com.example.hrec.presentation.forgotPassword.ForgotPasswordNew
 import com.example.hrec.presentation.onboardingScreen.OnboardScreen
-import com.example.hrec.presentation.onboardingScreen.OnboardScreen2
 import com.example.hrec.presentation.onboardingScreen.OnboardScreen3
 
 fun NavGraphBuilder.onboardScreenGraph(

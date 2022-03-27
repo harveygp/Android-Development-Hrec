@@ -11,31 +11,31 @@ fun SetupNavGraph(
 ){
     NavHost(
         navController = navController ,
-        startDestination = FORGOT_PASSWORD_ROUTE
+        startDestination = SPLASH_ROUTE
     ){
         forgotPasswordGraph(navController = navController)
         profileGraph(navController = navController)
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <<<<<<< HEAD
+=======
+
+>>>>>>> 415502e1b709cb6af62c2d4972f31475ef4acaa2
 //        Notification
         notificationGraph(navController = navController)
-        =======
 
-        <<<<<<< HEAD
 //      Sign In
         signInGraph(navController = navController)
 
 //      Sign Up
         signUpGraph(navController = navController)
-        =======
+
         //splash screen
         splashScreenGraph(navController = navController)
 
         //onboard screen
         onboardScreenGraph(navController = navController)
-        >>>>>>> 4a208073cac62e6583c4eda7eb03d9368a4d1a3f
-        >>>>>>> 49787092dedc400239df3c43477617fbd043402a
 
         //Dashboard Graph
         dashboardGraph(navController = navController)
