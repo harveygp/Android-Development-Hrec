@@ -1,22 +1,16 @@
 package com.example.hrec.presentation.dashboard
 
-import android.os.Bundle
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,34 +23,29 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hrec.R
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Alignment.Companion.TopStart
-import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.NavHost
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.currentBackStackEntryAsState
-import androidx.navigation.compose.rememberNavController
 import com.example.hrec.presentation.navigation.PROFILE_ROUTE
-import com.example.hrec.presentation.navigation.Screen
-import com.example.hrec.presentation.ui.theme.HRecTheme
 
 @Composable
-fun Dashboard(navController: NavHostController) {
-
+fun Dashboard(
+    navController: NavHostController,
+) {
+    Log.d("iya", "masuk dashbrad")
     val context = LocalContext.current
     var topNavRoute = "candidate"
+
 
     Column(
         modifier = Modifier
@@ -218,6 +207,7 @@ fun DashboardNavigation(navController: NavHostController) {
 
 @Composable
 fun DashboardCandidate() {
+
     Row(modifier = Modifier.fillMaxWidth()) {
 
     }
@@ -249,7 +239,7 @@ fun DashboardCandidate() {
             {
                 SearchSection()
                 Column(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.small))) {
-                    CandidateList(amount = 10)
+                    CandidateList()
                 }
             }
         }
@@ -355,11 +345,11 @@ fun DashboardAccepted() {
                 }
                 Column(modifier = Modifier) {
                     Divider("Ekonomi")
-                    CandidateList(amount = 2)
+                    CandidateList()
                     Divider("Manajemen")
-                    CandidateList(amount = 2)
+                    CandidateList()
                     Divider("IT")
-                    CandidateList(amount = 2)
+                    CandidateList()
                 }
 
             }
@@ -368,12 +358,17 @@ fun DashboardAccepted() {
 }
 
 @Composable
-fun CandidateList(amount: Int) {
+fun CandidateList(
+//    amount: Int,
+    viewModel : DashboardViewModel = hiltViewModel()
+) {
+    val state = viewModel.state.value
+
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_to_normal)),
     ) {
-        items(amount) {
+        items(state.applicants) { applicant ->
             Box(
                 modifier = Modifier
             ) {
@@ -391,6 +386,7 @@ fun CandidateList(amount: Int) {
                 ) {
                     Column(
                         modifier = Modifier
+//                            .clickable {  }
                             .fillMaxWidth()
                             .padding(
                                 start = dimensionResource(id = R.dimen.large_to_huge),
@@ -399,7 +395,7 @@ fun CandidateList(amount: Int) {
                             )
                     ) {
                         Text(
-                            text = "Derle Bohrmann",
+                            text = applicant.name,
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.h5,
                             fontSize = 20.sp,
@@ -407,7 +403,8 @@ fun CandidateList(amount: Int) {
                         )
                         Text(
                             modifier = Modifier.padding(start = 72.dp, top = dimensionResource(id = R.dimen.very_small_to_small)),
-                            text = "Economy, 90", style = MaterialTheme.typography.body2,
+                            text = stringResource(id = R.string.tv_positionAndScore, applicant.specialization, 90),
+                            style = MaterialTheme.typography.body2,
                             fontSize = 12.sp
                         )
                     }
@@ -451,9 +448,13 @@ fun CandidateList(amount: Int) {
                         contentDescription = "Profile Image"
                     )
                 }
-
+                if(state.error.isNotBlank()){
+                    Log.d("rusak1", "${state.error}")
+                }
+                if(state.isLoading){
+                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                }
             }
-
         }
     }
 }

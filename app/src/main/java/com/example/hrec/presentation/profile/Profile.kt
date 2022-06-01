@@ -1,7 +1,5 @@
 package com.example.hrec.presentation.profile
 
-import android.content.res.Configuration
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -29,7 +27,6 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
-import com.example.hrec.presentation.navigation.ONBOARD_ROUTE
 import com.example.hrec.presentation.navigation.SIGN_IN_ROUTE
 
 @Composable
