@@ -369,6 +369,7 @@ fun CandidateList(
         verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_to_normal)),
     ) {
         items(state.applicants) { applicant ->
+            Log.d("data", "${applicant.evaluation}")
             Box(
                 modifier = Modifier
             ) {

@@ -5,7 +5,9 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import com.example.hrec.data.remote.HRecAPI
 import com.example.hrec.data.repository.ApplicantRepositoryImpl
+import com.example.hrec.data.repository.AuthRepositoryImpl
 import com.example.hrec.domain.repository.ApplicantRepository
+import com.example.hrec.domain.repository.AuthRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,15 +32,20 @@ object AppModule {
             .create()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideSharedPref(app : Application) : SharedPreferences =
-//        app.getSharedPreferences("prefs", MODE_PRIVATE)
+    @Provides
+    @Singleton
+    fun provideSharedPref(app : Application) : SharedPreferences =
+        app.getSharedPreferences("prefs", MODE_PRIVATE)
 
 
     @Provides
     @Singleton
     fun provideUserApplicant(api : HRecAPI) : ApplicantRepository = ApplicantRepositoryImpl(api)
+
+    @Provides
+    @Singleton
+    fun provideAuthRepository(api : HRecAPI, prefs : SharedPreferences) : AuthRepository =
+        AuthRepositoryImpl(api, prefs)
 
 
 }

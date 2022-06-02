@@ -9,4 +9,5 @@ data class UserApplicant(
     val password : String,
     val degree : String,
     val status : Boolean,
+    val evaluation : Evaluation
 )

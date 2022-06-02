@@ -1,5 +1,7 @@
 package com.example.hrec.presentation.signIn
 
+import android.content.Context
+import android.widget.Toast
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -9,6 +11,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
@@ -21,16 +25,41 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.domain.model.Auth.AuthResult
 import com.example.hrec.presentation.navigation.*
 
 @Composable
 fun SignIn(
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel :  SignInVIewModel = hiltViewModel(),
 //    onClick : () -> Unit
     ) {
+
+    val context = LocalContext.current
+    val state = viewModel.state
+
+    LaunchedEffect(viewModel, context){
+        viewModel.authResults.collect{ result ->
+            when(result){
+                is AuthResult.Authorized -> {
+                    navController.navigate( route = DASHBOARD_ROUTE)
+                }
+                is AuthResult.Unauthorized -> {
+                    Toast.makeText(  context,
+                        "You're not authorized", Toast.LENGTH_LONG).show()
+                }
+                is AuthResult.UnknownError -> {
+                    Toast.makeText(  context,
+                        "An Error Occurred", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
 
     Column(
         modifier = Modifier
@@ -75,10 +104,10 @@ fun SignIn(
 
                 OutlinedTextField(modifier = Modifier
                     .fillMaxWidth(),
-                    value = email,
+                    value = state.email,
                     textStyle = MaterialTheme.typography.body1,
                     onValueChange ={
-                        email = it
+                        viewModel.onEvent(SignInUIEvent.SignInEmailChanged(it))
                     },label = {
                         Text(text = stringResource(id = R.string.tv_Email))
                     },
@@ -100,10 +129,10 @@ fun SignIn(
 
                 OutlinedTextField(modifier = Modifier
                     .fillMaxWidth(),
-                    value = password,
+                    value = state.password,
                     textStyle = MaterialTheme.typography.body1,
                     onValueChange ={
-                        password = it
+                        viewModel.onEvent(SignInUIEvent.SignInPasswordChanged(it))
                     },
                     label = {
                         Text(text = stringResource(id = R.string.tv_Password))
@@ -184,8 +213,10 @@ fun SignIn(
                         .fillMaxWidth()
                 ) {
                     Button(onClick = {
-                        navController.navigate(
-                            route = ONBOARD_ROUTE)
+                        viewModel.onEvent(SignInUIEvent.SignIn)
+//                        Log.d("data email", "${state.email}")
+//                        Log.d("data email", "${state.password}")
+//                        navController.navigate( route = DASHBOARD_ROUTE)
                                      },
                         modifier = Modifier
                             .fillMaxWidth()
@@ -337,6 +368,16 @@ fun SignIn(
                     fontSize = 10.sp,
                     style = MaterialTheme.typography.subtitle2)
             }
+        }
+    }
+    if (state.isLoading) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
+            contentAlignment = Alignment.Center
+        ) {
+            CircularProgressIndicator()
         }
     }
 }
