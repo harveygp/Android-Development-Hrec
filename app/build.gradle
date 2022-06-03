@@ -91,4 +91,7 @@ dependencies {
     // Retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
+
+    // Swipeable Component
+    implementation "me.saket.swipe:swipe:1.0.0"
 }
