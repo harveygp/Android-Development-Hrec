@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -20,32 +21,32 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hrec.R
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.Alignment.Companion.TopStart
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
+import com.example.hrec.presentation.dashboard.components.CandidateList
 import com.example.hrec.presentation.navigation.PROFILE_ROUTE
+import com.example.hrec.presentation.navigation.Screen
 
 @Composable
 fun Dashboard(
-    navController: NavHostController,
+    navController: NavHostController
 ) {
     Log.d("iya", "masuk dashbrad")
-    val context = LocalContext.current
-    var topNavRoute = "candidate"
 
+    TopNavigationBar(navController)
+}
+
+@Composable
+fun TopNavigationBar(
+    navController: NavHostController
+) {
 
     Column(
         modifier = Modifier
@@ -89,7 +90,6 @@ fun Dashboard(
                                     )
                                 ),
                                 onClick = {
-                                    topNavRoute = "candidate"
                                 }) {
                                 Row() {
                                     Image(
@@ -127,7 +127,6 @@ fun Dashboard(
                                     )
                                 ),
                                 onClick = {
-                                    topNavRoute = "accepted"
                                 }) {
                                 Row() {
                                     Image(
@@ -162,7 +161,8 @@ fun Dashboard(
                                 ),
                                 onClick = {
                                     navController.navigate(
-                                        route = PROFILE_ROUTE)
+                                        route = PROFILE_ROUTE
+                                    )
                                 })
                             {
                                 Image(
@@ -183,10 +183,7 @@ fun Dashboard(
                     }
                 }
             ) {
-                when (topNavRoute) {
-                    "candidate" -> DashboardCandidate()
-                    "accepted" -> DashboardAccepted()
-                }
+                DashboardCandidate(navController = navController)
             }
         }
 
@@ -194,20 +191,11 @@ fun Dashboard(
 }
 
 @Composable
-fun DashboardNavigation(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "candidate") {
-        composable("candidate") {
-            DashboardCandidate()
-        }
-        composable("accepted") {
-            DashboardAccepted()
-        }
-    }
-}
-
-@Composable
-fun DashboardCandidate() {
-
+fun DashboardCandidate(
+    navController: NavHostController,
+    viewModel: DashboardViewModel = hiltViewModel()
+) {
+    val state = viewModel.state.value
     Row(modifier = Modifier.fillMaxWidth()) {
 
     }
@@ -239,225 +227,38 @@ fun DashboardCandidate() {
             {
                 SearchSection()
                 Column(modifier = Modifier.padding(top = dimensionResource(id = R.dimen.small))) {
-                    CandidateList()
-                }
-            }
-        }
-    }
 
-}
-
-@Composable
-fun DashboardAccepted() {
-
-    val context = LocalContext.current
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(color = colorResource(id = R.color.primary)),
-        horizontalAlignment = Alignment.CenterHorizontally
-    )
-    {
-        Surface(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(12f)
-                .clip(
-                    RoundedCornerShape(
-                        topStart = dimensionResource(id = R.dimen.large),
-                        topEnd = dimensionResource(id = R.dimen.large)
-                    )
-                ),
-            color = Color.White
-        )
-        {
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(dimensionResource(id = R.dimen.large_to_huge))
-            )
-            {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    color = Color.White
-                ) {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
+                    LazyColumn(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_to_normal)),
                     ) {
-                        Column(modifier = Modifier.padding(end = dimensionResource(id = R.dimen.small_to_normal))) {
-                            Button(
-                                onClick = { },
-                                shape = RoundedCornerShape(10.dp),
-                                colors = ButtonDefaults.buttonColors(
-                                    backgroundColor = Color(
-                                        0xfff1f1f1
-                                    )
-                                )
-                            ) {
-                                Text(
-                                    text = "ALL",
-                                    color = Color.Black,
-                                    textAlign = TextAlign.Center,
-                                )
-                            }
-                        }
-                        Column(modifier = Modifier.padding(end = dimensionResource(id = R.dimen.small_to_normal))) {
-                            Button(
-                                onClick = { },
-                                shape = RoundedCornerShape(10.dp),
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color.White)
-                            ) {
-                                Text(
-                                    text = "ALL",
-                                    color = Color.Black,
-                                    textAlign = TextAlign.Center,
-                                )
-                            }
-                        }
-
-                        Row(
-                            horizontalArrangement = Arrangement.End,
-                            verticalAlignment = Alignment.CenterVertically
-                        )
-                        {
-                            Button(modifier = Modifier.clip(
-                                RoundedCornerShape(dimensionResource(id = R.dimen.small))
-                            ),
-                                colors = ButtonDefaults.buttonColors(
-                                    backgroundColor = Color.White
-                                ),
-                                onClick = {
-                                    /*TODO*/
-                                }) {
-                                Row() {
-                                    Image(
-                                        modifier = Modifier.size(20.dp),
-                                        painter = painterResource(id = R.drawable.ic_filter_candidate),
-                                        contentDescription = "Accepted"
-                                    )
-                                }
-                            }
+                        items(state.applicants) { applicant ->
+                            CandidateList(
+                                applicant = applicant,
+                                onItemClick = {
+                                    navController.navigate(Screen.ApplicantDetail.route + "/${applicant._id}")}
+                            )
                         }
                     }
                 }
-                Column(modifier = Modifier) {
-                    Divider("Ekonomi")
-                    CandidateList()
-                    Divider("Manajemen")
-                    CandidateList()
-                    Divider("IT")
-                    CandidateList()
-                }
-
             }
         }
-    }
-}
-
-@Composable
-fun CandidateList(
-//    amount: Int,
-    viewModel : DashboardViewModel = hiltViewModel()
-) {
-    val state = viewModel.state.value
-
-    LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.small_to_normal)),
-    ) {
-        items(state.applicants) { applicant ->
-            Log.d("data", "${applicant.evaluation}")
+        if(state.error.isNotBlank()){
+            Log.d("rusak1", "${state.error}")
+        }
+        if(state.isLoading){
             Box(
                 modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White),
+                contentAlignment = Alignment.Center
             ) {
-                Column(
-                    modifier = Modifier
-                        .clip(RoundedCornerShape(dimensionResource(id = R.dimen.small_to_normal)))
-                        .fillMaxWidth()
-                        .background(color = colorResource(id = R.color.white))
-                        .border(
-                            3.dp,
-                            colorResource(id = R.color.primary),
-                            RoundedCornerShape(25),
-                        )
-                        .align(Alignment.BottomStart)
-                ) {
-                    Column(
-                        modifier = Modifier
-//                            .clickable {  }
-                            .fillMaxWidth()
-                            .padding(
-                                start = dimensionResource(id = R.dimen.large_to_huge),
-                                end = dimensionResource(id = R.dimen.large_to_huge),
-                                top = dimensionResource(id = R.dimen.normal)
-                            )
-                    ) {
-                        Text(
-                            text = applicant.name,
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.h5,
-                            fontSize = 20.sp,
-                            fontWeight = FontWeight.SemiBold
-                        )
-                        Text(
-                            modifier = Modifier.padding(start = 72.dp, top = dimensionResource(id = R.dimen.very_small_to_small)),
-                            text = stringResource(id = R.string.tv_positionAndScore, applicant.specialization, 90),
-                            style = MaterialTheme.typography.body2,
-                            fontSize = 12.sp
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.small)))
-
-                }
-                Row(
-                    modifier = Modifier
-                        .fillMaxHeight()
-                        .padding(
-                            top = dimensionResource(id = R.dimen.small)
-                        )
-                        .align(TopStart)
-                ) {
-                    Box(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(16.dp)
-                            .background(colorResource(id = R.color.bright_green))
-                    )
-                }
-                Row(
-                    modifier = Modifier
-                        .align(Alignment.TopEnd)
-                        .padding(
-                            bottom = dimensionResource(id = R.dimen.small),
-                            end = dimensionResource(id = R.dimen.small)
-                        )
-                ) {
-                    Image(
-                        modifier = Modifier
-                            .clip(CircleShape)
-                            .size(80.dp)
-                            .border(
-                                5.dp,
-                                colorResource(id = R.color.primary),
-                                CircleShape
-                            ),
-                        painter = painterResource(id = R.drawable.ic_launcher_background),
-                        contentDescription = "Profile Image"
-                    )
-                }
-                if(state.error.isNotBlank()){
-                    Log.d("rusak1", "${state.error}")
-                }
-                if(state.isLoading){
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-                }
+                CircularProgressIndicator()
             }
         }
+
     }
+
 }
 
 @Composable
@@ -578,23 +379,6 @@ fun Divider(title: String) {
     }
 }
 
-//@Preview
-//@Composable
-//fun DashboardPreview() {
-//    Dashboard(navController = rememberNavController())
-//}
-
-@Preview
-@Composable
-fun DashboardCandidatePreview() {
-    DashboardCandidate()
-}
-//
-//@Preview
-//@Composable
-//fun DashboardAcceptedPreview() {
-//    DashboardAccepted()
-//}
 
 
 

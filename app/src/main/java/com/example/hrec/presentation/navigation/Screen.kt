@@ -22,6 +22,9 @@ const val SPLASH_ROUTE = "splash"
 //Onboarding Screen
 const val ONBOARD_ROUTE = "onboard"
 
+//Applicant Detail
+const val APPLICANTDETAIL_ROUTE = "applicantDetail"
+
 sealed class Screen(val route: String) {
 
     object ForgotPassword : Screen("forgot_password_screen")
@@ -46,6 +49,9 @@ sealed class Screen(val route: String) {
     object SignIn : Screen("signin_screen")
     //  Sign Up
     object SignUp : Screen("signup_screen")
+
+    // Applicant Detail
+    object ApplicantDetail : Screen("ApplicantDetail_screen")
 
 }
 

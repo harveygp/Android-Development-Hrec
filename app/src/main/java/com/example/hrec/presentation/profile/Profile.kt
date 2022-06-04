@@ -1,5 +1,7 @@
 package com.example.hrec.presentation.profile
 
+import android.util.Log
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -24,30 +26,39 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.hrec.R
+import com.example.hrec.domain.model.UserDetail
 import com.example.hrec.presentation.navigation.SIGN_IN_ROUTE
 
 @Composable
 fun Profile(
-    navController: NavHostController
-//    onClick : () -> Unit
+    navController: NavHostController,
+    viewModel: UserProfileViewModel = hiltViewModel()
 ) {
 
-    var nameProfile by remember{
-        mutableStateOf("")
+
+    val state = viewModel.state.value
+
+    var nameProfile by remember {
+        mutableStateOf(" ")
     }
 
-    var email by remember{
-        mutableStateOf("")
+    var email by remember {
+        mutableStateOf(" ")
     }
 
-    var position by remember{
-        mutableStateOf("")
+    var position by remember {
+        mutableStateOf(" ")
     }
 
-    val context = LocalContext.current
+    if (state.user?.size != 0) {
+        nameProfile = state.user?.get(0)?.name ?: ""
+        email = state.user?.get(0)?.email ?: ""
+        position = state.user?.get(0)?.position ?: ""
+    }
 
     Column(
         modifier = Modifier
@@ -190,114 +201,144 @@ fun Profile(
                     }
                 }
                 //body
-                Spacer(modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.large)))
+                Spacer(
+                    modifier = Modifier
+                        .height(dimensionResource(id = R.dimen.large))
+                )
 
                 OutlinedTextField(modifier = Modifier
                     .fillMaxWidth(),
                     value = nameProfile,
                     textStyle = MaterialTheme.typography.body1,
-                    onValueChange ={
+                    onValueChange = {
                         nameProfile = it
-                    },label = {
+                    }, label = {
                         Text(text = stringResource(id = R.string.tv_name))
                     },
                     maxLines = 1,
                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                        unfocusedBorderColor = colorResource(id = R.color.primary)),
+                        unfocusedBorderColor = colorResource(id = R.color.primary)
+                    ),
                     trailingIcon = {
-                        Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit" )
-                    }
+                        Icon(imageVector = Icons.Filled.Edit, contentDescription = "Edit")
+                    },
+                    enabled = false
                 )
 
-                Spacer(modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.small_to_normal)))
+                Spacer(
+                    modifier = Modifier
+                        .height(dimensionResource(id = R.dimen.small_to_normal))
+                )
 
                 OutlinedTextField(modifier = Modifier
                     .fillMaxWidth(),
                     value = email,
                     textStyle = MaterialTheme.typography.body1,
-                    onValueChange ={
-                        email= it
-                    },label = {
+                    onValueChange = {
+                        email = it
+                    }, label = {
                         Text(text = stringResource(id = R.string.tv_Email))
                     },
                     maxLines = 1,
                     colors = TextFieldDefaults.outlinedTextFieldColors(
-                        unfocusedBorderColor = colorResource(id = R.color.primary)),
+                        unfocusedBorderColor = colorResource(id = R.color.primary)
+                    ),
                     trailingIcon = {
-                        Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "Check" )
-                    }
+                        Icon(imageVector = Icons.Filled.CheckCircle, contentDescription = "Check")
+                    },
+                    enabled = false
                 )
 
-                Spacer(modifier = Modifier
-                    .height(dimensionResource(id = R.dimen.small_to_normal)))
+                Spacer(
+                    modifier = Modifier
+                        .height(dimensionResource(id = R.dimen.small_to_normal))
+                )
 
                 Row(modifier = Modifier.fillMaxWidth())
                 {
-                    Row(modifier = Modifier
-                        .weight(1f)) {
+                    Row(
+                        modifier = Modifier
+                            .weight(1f)
+                    ) {
 
                         OutlinedTextField(modifier = Modifier
                             .fillMaxWidth(),
                             value = position,
                             textStyle = MaterialTheme.typography.body1,
-                            onValueChange ={
-                                position= it
-                            },label = {
+                            onValueChange = {
+                                position = it
+                            }, label = {
                                 Text(text = stringResource(id = R.string.tv_position))
                             },
                             maxLines = 1,
                             colors = TextFieldDefaults.outlinedTextFieldColors(
-                                unfocusedBorderColor = colorResource(id = R.color.primary))
+                                unfocusedBorderColor = colorResource(id = R.color.primary)
+                            ),
+                            enabled = false
                         )
                     }
 
-                    Row(modifier = Modifier
-                        .weight(1f)
-                        .padding(start = dimensionResource(id = R.dimen.small))
-                        .align(Alignment.CenterVertically)) {
-                        Image(modifier = Modifier.size(dimensionResource(id = R.dimen.normal_to_large)),
+                    Row(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(start = dimensionResource(id = R.dimen.small))
+                            .align(Alignment.CenterVertically)
+                    ) {
+                        Image(
+                            modifier = Modifier.size(dimensionResource(id = R.dimen.normal_to_large)),
                             painter = painterResource(id = R.drawable.ic_explanation),
-                            contentDescription = "Explain")
+                            contentDescription = "Explain"
+                        )
                     }
                 }
-                Column(modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.Start)
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.Bottom,
+                    horizontalAlignment = Alignment.Start
+                )
                 {
                     Button(modifier = Modifier.clip(
-                        RoundedCornerShape(dimensionResource(id = R.dimen.small_to_normal))),
+                        RoundedCornerShape(dimensionResource(id = R.dimen.small_to_normal))
+                    ),
                         colors = ButtonDefaults.buttonColors(backgroundColor = colorResource(id = R.color.light_primary)),
                         onClick = {
                             navController.navigate(
                                 route = SIGN_IN_ROUTE
                             )
                         }) {
-                        Row(modifier = Modifier.padding(dimensionResource(id = R.dimen.very_small_to_small))){
-                            Image(painter = painterResource(id = R.drawable.ic_out),
-                                contentDescription = "Logout")
+                        Row(modifier = Modifier.padding(dimensionResource(id = R.dimen.very_small_to_small))) {
+                            Image(
+                                painter = painterResource(id = R.drawable.ic_out),
+                                contentDescription = "Logout"
+                            )
 
-                            Text(modifier = Modifier.padding(start = dimensionResource(id = R.dimen.small)),
+                            Text(
+                                modifier = Modifier.padding(start = dimensionResource(id = R.dimen.small)),
                                 text = stringResource(id = R.string.tv_logout),
                                 style = MaterialTheme.typography.body1,
                                 fontWeight = FontWeight.SemiBold,
-                                color = Color.White)
+                                color = Color.White
+                            )
                         }
                     }
                 }
             }
         }
+        if (state.error.isNotBlank()) {
+            Log.d("Error", state.error)
+        }
+        if (state.isLoading && state.user?.size ?: 0 == 0) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
     }
 }
-
-
-//@Preview(name = "Light Mode")
-//@Preview(
-//    uiMode = Configuration.UI_MODE_NIGHT_YES,
-//    showBackground = true,
-//    name = "Dark Mode"
-//)
 
 @Preview(showBackground = true)
 @Composable
