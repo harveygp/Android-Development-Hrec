@@ -21,11 +21,8 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hrec.R
-import androidx.compose.ui.Alignment.Companion.TopStart
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -33,12 +30,9 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.example.hrec.presentation.dashboard.components.CandidateList
-import com.example.hrec.presentation.dashboard.components.TopNavViewModel
 import com.example.hrec.presentation.navigation.PROFILE_ROUTE
+import com.example.hrec.presentation.navigation.Screen
 
 @Composable
 fun Dashboard(
@@ -51,13 +45,8 @@ fun Dashboard(
 
 @Composable
 fun TopNavigationBar(
-    navController: NavHostController,
-    topNavViewModel: TopNavViewModel = viewModel()
+    navController: NavHostController
 ) {
-    val context = LocalContext.current
-    val topNavRoute by remember {
-        mutableStateOf(topNavViewModel.screenState)
-    }
 
     Column(
         modifier = Modifier
@@ -101,7 +90,6 @@ fun TopNavigationBar(
                                     )
                                 ),
                                 onClick = {
-                                    topNavViewModel.candidateScreen()
                                 }) {
                                 Row() {
                                     Image(
@@ -139,7 +127,6 @@ fun TopNavigationBar(
                                     )
                                 ),
                                 onClick = {
-                                    topNavViewModel.acceptedScreen()
                                 }) {
                                 Row() {
                                     Image(
@@ -205,8 +192,8 @@ fun TopNavigationBar(
 
 @Composable
 fun DashboardCandidate(
-    viewModel: DashboardViewModel = hiltViewModel(),
-    navController: NavHostController
+    navController: NavHostController,
+    viewModel: DashboardViewModel = hiltViewModel()
 ) {
     val state = viewModel.state.value
     Row(modifier = Modifier.fillMaxWidth()) {
@@ -248,15 +235,30 @@ fun DashboardCandidate(
                         items(state.applicants) { applicant ->
                             CandidateList(
                                 applicant = applicant,
-                                onItemClick = {  }
+                                onItemClick = {
+                                    navController.navigate(Screen.ApplicantDetail.route + "/${applicant._id}")}
                             )
                         }
                     }
                 }
             }
         }
+        if(state.error.isNotBlank()){
+            Log.d("rusak1", "${state.error}")
+        }
+        if(state.isLoading){
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.White),
+                contentAlignment = Alignment.Center
+            ) {
+                CircularProgressIndicator()
+            }
+        }
 
     }
+
 }
 
 @Composable

@@ -22,6 +22,7 @@ class SignInVIewModel @Inject constructor(
 ) : ViewModel() {
 
     var state by mutableStateOf(SignInState())
+
     private val looking = prefs.getString("Hrec", " ")
 
     private val resultChannel = Channel<AuthResult<Unit>>()
@@ -29,7 +30,6 @@ class SignInVIewModel @Inject constructor(
 
     init {
         authenticate()
-        Log.d("testing", looking ?: " ")
     }
 
     fun onEvent(event: SignInUIEvent) {

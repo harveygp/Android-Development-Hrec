@@ -33,5 +33,8 @@ fun SetupNavGraph(
 
         //Dashboard Graph
         dashboardGraph(navController = navController)
+
+        //Applicant Detail
+        applicantDetail(navController = navController)
     }
 }

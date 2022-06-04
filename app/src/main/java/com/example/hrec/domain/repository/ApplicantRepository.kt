@@ -9,6 +9,6 @@ interface ApplicantRepository {
 
     suspend fun getApplicants() : Flow<Condition<List<UserApplicant>>>
 
-    suspend fun getIdApplicant( appId :  String ) : Flow<Condition<UserDetailApplicant>>
+    suspend fun getApplicantId( appId :  String ) : Flow<Condition<UserDetailApplicant>>
 
 }
