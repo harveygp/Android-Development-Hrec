@@ -1,5 +1,6 @@
 package com.example.hrec.presentation.dashboard
 
+import android.content.SharedPreferences
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import com.example.hrec.domain.use_case.getApplicantUseCase
@@ -15,11 +16,15 @@ import kotlinx.coroutines.launch
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val getApplicantsUseCase : getApplicantUseCase
+    private val getApplicantsUseCase : getApplicantUseCase,
+    private val prefs : SharedPreferences
 ) : ViewModel(){
 
     private val _state = mutableStateOf(ApplicantListState())
     val state : State<ApplicantListState> = _state
+
+    private val _pref = prefs.getString("Hrec", " ")
+    val pref = _pref
 
     init {
         getApplicants()

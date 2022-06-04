@@ -28,7 +28,16 @@ class ApplicantRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getIdApplicant(appId: String): Flow<Condition<UserDetailApplicant>> {
-        TODO("Not yet implemented")
+    override suspend fun getApplicantId(appId: String): Flow<Condition<UserDetailApplicant>> = flow {
+        try {
+            emit(Condition.Loading<UserDetailApplicant>())
+            val applicants = api.getApplicantId(appId = appId)
+            Log.d("data api masuk", applicants.toString())
+            emit(Condition.Success<UserDetailApplicant>(applicants))
+        } catch (e : HttpException){
+            emit(Condition.Error<UserDetailApplicant>(e.localizedMessage ?: "An Error Occurred"))
+        } catch (e : IOException){
+            emit(Condition.Error<UserDetailApplicant>("No Internet Detected"))
+        }
     }
 }

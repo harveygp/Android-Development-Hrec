@@ -46,7 +46,7 @@ fun SignIn(
         viewModel.authResults.collect{ result ->
             when(result){
                 is AuthResult.Authorized -> {
-                    navController.navigate( route = DASHBOARD_ROUTE)
+                    navController.navigate( route = ONBOARD_ROUTE)
                 }
                 is AuthResult.Unauthorized -> {
                     Toast.makeText(  context,
@@ -214,9 +214,6 @@ fun SignIn(
                 ) {
                     Button(onClick = {
                         viewModel.onEvent(SignInUIEvent.SignIn)
-//                        Log.d("data email", "${state.email}")
-//                        Log.d("data email", "${state.password}")
-//                        navController.navigate( route = DASHBOARD_ROUTE)
                                      },
                         modifier = Modifier
                             .fillMaxWidth()

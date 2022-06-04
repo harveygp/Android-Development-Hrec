@@ -148,7 +148,6 @@ fun CandidateList(
                     contentDescription = "Profile Image"
                 )
             }
-
         }
     }
 }

@@ -30,6 +30,6 @@ interface HRecAPI {
     )
 
     @GET("userrec/users/{userId}")
-    suspend fun getUser(@Path("userId") userId : String) : UserDetail
+    suspend fun getUser(@Path("userId") userId : String) : List<UserDetail>
 
 }
